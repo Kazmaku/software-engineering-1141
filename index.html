@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>桃園市國小學區地圖</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="control-panel">
+        <h2>桃園市國小學區查詢</h2>
+        
+        <h4>第一步：選擇行政區</h4>
+        <select id="districtSelect">
+            <option value="">載入中...</option>
+        </select>
+
+        <h4>第二步：選擇學校</h4>
+        <select id="schoolSelect" disabled>
+            <option value="">請先選擇行政區</option>
+        </select>
+        
+        <div id="school-info">
+            <div class="info-item">
+                <span class="info-label">學校：</span> <span id="display-name"></span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">電話：</span> <span id="display-phone"></span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">學區範圍：</span><br>
+                <span id="display-area" style="display:block; margin-top:5px; line-height:1.4;"></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
