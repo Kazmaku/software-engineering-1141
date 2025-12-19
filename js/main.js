@@ -24,10 +24,16 @@ Promise.all([
         alert("資料讀取失敗，請確認 data/school_clean.json 與 data/taoyuan_villages.geojson 是否存在。");
     });
 
-//初始化地圖圖層 (透明)
+//初始化地圖圖層
 function initMapLayer(geoJson) {
-    villageLayer = L.geoJSON(geoJson, {
-        style: { color: '#3388ff', weight: 1, opacity: 0, fillOpacity: 0 }
+villageLayer = L.geoJSON(geoJson, {
+        style: {
+            color: '#555',          // 邊框顏色
+            weight: 0.2,              // 邊框粗細
+            opacity: 0.5,             // 邊框不透明度
+            fillColor: '#3388ff',   // 填滿顏色
+            fillOpacity: 0.1          // 填滿透明度
+        }
     }).addTo(map);
 }
 
@@ -124,24 +130,36 @@ function highlightDistricts(schoolData) {
 
     if (!areaText) return;
 
-    const targetVillages = areaText
-        .split(/，|、/)
-        .map(t => t.replace(/◎/g, '').replace(/[\(（].*?[\)）]/g, '').replace('里', '').trim())
+    // (?:[^\(（，、]+      -> 匹配「非分隔符號」的連續文字 (例如：中正)
+    // |[\(（][^）\)]*[\)）])+ -> 或者匹配「括號及其內容」 (例如：(3-23、27-28))
+    // 確保「中正(3-23、27-28)」被視為一個整體，不會被中間的頓號切斷
+    const regex = /(?:[^\(（，、]+|[\(（][^）\)]*[\)）])+/g;
+    
+    const targetVillages = (areaText.match(regex) || [])
+        .map(t => {
+            // 清理文字：移除 ◎、移除括號內容、移除 "里"、移除空白
+            return t.replace(/◎/g, '')
+                    .replace(/[\(（].*?[\)）]/g, '') // 移除括號及內容
+                    .replace('里', '')
+                    .trim();
+        })
         .filter(t => t.length > 0);
+
+    // ============================================
 
     let bounds = L.latLngBounds();
     let foundAny = false;
 
     villageLayer.eachLayer(layer => {
-        const mapTown = layer.feature.properties.TOWNNAME;
+        const mapTown = layer.feature.properties.TOWNNAME; 
         const mapVill = layer.feature.properties.VILLNAME;
 
         if ((mapTown.includes(districtName) || districtName.includes(mapTown))) {
             const isVillMatch = targetVillages.some(target => mapVill.includes(target) && target.length >= 2);
-
+            
             if (isVillMatch) {
                 layer.setStyle({
-                    color: '#e74c3c', weight: 2, opacity: 1,
+                    color: '#e74c3c', weight: 2, opacity: 1, 
                     fillColor: '#f39c12', fillOpacity: 0.5
                 });
                 bounds.extend(layer.getBounds());
