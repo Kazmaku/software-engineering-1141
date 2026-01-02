@@ -1,0 +1,140 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    font-family: "Microsoft JhengHei", sans-serif;
+}
+
+#map {
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+}
+
+#map {
+    height: calc(100vh - 60px);
+    width: 100%;
+    z-index: 1;
+    border-radius: 8px;
+}
+
+.school-info-card {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    max-width: 90vw;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+[data-bs-theme="dark"] #map {
+    background-color: #333;
+}
+
+[data-bs-theme="dark"] .leaflet-tile-pane {
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+[data-bs-theme="dark"] .school-info-card {
+    background-color: rgba(33, 37, 41, 0.95);
+    color: #e0e0e0;
+    border-color: #495057;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+[data-bs-theme="dark"] .school-info-card h5 {
+    color: #6ea8fe !important;
+}
+
+[data-bs-theme="dark"] .school-info-card .text-muted {
+    color: #adb5bd !important;
+}
+
+[data-bs-theme="dark"] select.form-select {
+    background-color: #2b3035;
+    color: #fff;
+    border-color: #495057;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+select:disabled {
+    background-color: #eee;
+    cursor: not-allowed;
+    color: #999;
+}
+
+#school-info {
+    display: none;
+    background-color: #f8f9fa;
+    border-left: 4px solid #3498db;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 4px;
+}
+
+.info-item {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+.info-label {
+    font-weight: bold;
+    color: #333;
+}
+
+[data-bs-theme="dark"] body {
+    background-color: #212529 !important;
+    color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] .navbar {
+    background-color: #212529 !important;
+    border-bottom-color: #495057 !important;
+}
+
+[data-bs-theme="dark"] .navbar-brand,
+[data-bs-theme="dark"] .nav-link {
+    color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] .nav-link:hover {
+    color: #adb5bd !important;
+}
+
+[data-bs-theme="dark"] .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-bs-theme="dark"] .navbar-toggler-icon {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+[data-bs-theme="dark"] a {
+    color: #6ea8fe;
+}
+
+[data-bs-theme="dark"] .text-muted {
+    color: #adb5bd !important;
+}
+
+[data-bs-theme="dark"] .table {
+    color: #f8f9fa;
+    border-color: #495057;
+}   

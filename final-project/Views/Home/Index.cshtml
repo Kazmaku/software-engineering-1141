@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "桃園市國小學區地圖";
+    var districts = ViewBag.Districts as List<string>;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+}
+
+@section NavbarControls {
+    <select id="districtSelect" class="form-select form-select-sm" style="width: auto; min-width: 120px;">
+        <option value="">選擇行政區...</option>
+        @if (districts != null)
+        {
+            foreach (var dist in districts)
+            {
+                <option value="@dist">@dist</option>
+            }
+        }
+    </select>
+
+    <select id="schoolSelect" class="form-select form-select-sm" style="width: auto; min-width: 150px;" disabled>
+        <option value="">請先選擇行政區</option>
+    </select>
+}
+
+<div id="school-info" class="school-info-card" style="display:none;">
+    <button type="button" class="btn-close float-end" aria-label="Close" onclick="document.getElementById('school-info').style.display='none'"></button>
+    <h5 id="display-name" class="mb-3 fw-bold text-primary"></h5>
+
+    <div class="info-item">
+        <span class="info-label">電話：</span> <span id="display-phone"></span>
+    </div>
+    <div class="info-item">
+        <span class="info-label">學區範圍：</span>
+        <div id="display-area" class="text-muted mt-1 small"></div>
+    </div>
+</div>
+
+<div id="map"></div>
+
+@section Scripts {
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="~/js/mapController.js"></script>
+}
